@@ -25,6 +25,8 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Scooby extends Application {
 
 	public static void main(String[] args) {
@@ -80,6 +82,7 @@ public class Scooby extends Application {
 	}
 	
 	private void fireSignalToChef() {
+		/*
 		Thread thread = new Thread() {
 
 			@Override
@@ -95,6 +98,21 @@ public class Scooby extends Application {
 			}
 		};
 		thread.start();
+		*/
+		Thread thread = new Thread() {
+
+			@Override
+			public void run() {
+				try {
+					System.out.println("Firing signal to chef");
+					Runtime.getRuntime().exec("ruby deer_abby.rb");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
+		
 	}
 
 	protected void writeToUSB() {
